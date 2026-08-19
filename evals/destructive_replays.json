@@ -1,0 +1,170 @@
+[
+  {
+    "id": "default_expansion_to_root",
+    "shell": "bash",
+    "command": "rm -rf \"${TARGET:-/}\"",
+    "expected": "deny"
+  },
+  {
+    "id": "absolute_rm_root",
+    "shell": "bash",
+    "command": "/usr/bin/rm -rf /",
+    "expected": "deny"
+  },
+  {
+    "id": "long_options_rm_root",
+    "shell": "bash",
+    "command": "rm --recursive --force /",
+    "expected": "deny"
+  },
+  {
+    "id": "braced_home_delete",
+    "shell": "bash",
+    "command": "rm -rf \"${HOME}\"",
+    "expected": "deny"
+  },
+  {
+    "id": "unknown_variable_delete",
+    "shell": "bash",
+    "command": "rm -rf \"$TARGET\"",
+    "expected": "require_approval"
+  },
+  {
+    "id": "line_continuation_root",
+    "shell": "bash",
+    "command": "rm -rf \\\n/",
+    "expected": "deny"
+  },
+  {
+    "id": "find_home_delete",
+    "shell": "bash",
+    "command": "find \"$HOME\" -mindepth 1 -delete",
+    "expected": "deny"
+  },
+  {
+    "id": "git_clean",
+    "shell": "bash",
+    "command": "git clean -fdx",
+    "expected": "require_approval"
+  },
+  {
+    "id": "python_rmtree",
+    "shell": "bash",
+    "command": "python -c \"import shutil; shutil.rmtree('/home/user')\"",
+    "expected": "require_approval"
+  },
+  {
+    "id": "python_remove",
+    "shell": "bash",
+    "command": "python -c \"import os; os.remove('/tmp/file')\"",
+    "expected": "require_approval"
+  },
+  {
+    "id": "rsync_delete_home",
+    "shell": "bash",
+    "command": "rsync -a --delete /tmp/empty/ \"$HOME\"/",
+    "expected": "deny"
+  },
+  {
+    "id": "safe_temp_cleanup",
+    "shell": "bash",
+    "command": "rm -rf /tmp/agent-scratch-123",
+    "expected": "require_approval"
+  },
+  {
+    "id": "powershell_literal_home",
+    "shell": "powershell",
+    "command": "Remove-Item -LiteralPath $HOME\\* -Recurse -Force",
+    "expected": "deny"
+  },
+  {
+    "id": "powershell_home",
+    "shell": "powershell",
+    "command": "Remove-Item $HOME -Recurse -Force",
+    "expected": "deny"
+  },
+  {
+    "id": "powershell_positional_drive_root",
+    "shell": "powershell",
+    "command": "Remove-Item C:\\ -Recurse -Force",
+    "expected": "deny"
+  },
+  {
+    "id": "powershell_literal_drive_root",
+    "shell": "powershell",
+    "command": "Remove-Item -LiteralPath C:\\ -Recurse -Force",
+    "expected": "deny"
+  },
+  {
+    "id": "powershell_temp_path",
+    "shell": "powershell",
+    "command": "Remove-Item -Recurse -Force -Path C:\\temp\\agent-scratch",
+    "expected": "require_approval"
+  },
+  {
+    "id": "cmd_profile_rmdir",
+    "shell": "cmd",
+    "command": "cmd /c rd /s /q %USERPROFILE%",
+    "expected": "deny"
+  },
+  {
+    "id": "cmd_drive_root_rmdir",
+    "shell": "cmd",
+    "command": "rd /s /q C:\\",
+    "expected": "deny"
+  },
+  {
+    "id": "reserved_home_assignment",
+    "shell": "bash",
+    "command": "HOME=/tmp/scratch; rm -rf \"$HOME\"",
+    "expected": "deny"
+  },
+  {
+    "id": "reserved_temp_assignment",
+    "shell": "powershell",
+    "command": "$env:TEMP = 'C:\\scratch'",
+    "expected": "deny"
+  },
+  {
+    "id": "local_path_variable",
+    "shell": "powershell",
+    "command": "$path = Join-Path $PWD 'scratch'",
+    "expected": "allow"
+  },
+  {
+    "id": "normal_path_customization",
+    "shell": "bash",
+    "command": "PATH=\"./bin:$PATH\" make test",
+    "expected": "allow"
+  },
+  {
+    "id": "powershell_stream_redirect",
+    "shell": "powershell",
+    "command": "Get-Process 2>&1",
+    "expected": "allow"
+  },
+  {
+    "id": "privilege_escape",
+    "shell": "bash",
+    "command": "sudo rm -rf /tmp/build",
+    "expected": "deny"
+  },
+  {
+    "id": "filesystem_format",
+    "shell": "bash",
+    "command": "mkfs.ext4 /dev/sdb1",
+    "expected": "deny"
+  },
+  {
+    "id": "benign_status",
+    "shell": "bash",
+    "command": "git status --short",
+    "expected": "allow"
+  },
+  {
+    "id": "benign_test",
+    "shell": "bash",
+    "command": "python -m unittest discover -s tests -v",
+    "expected": "allow"
+  }
+]
