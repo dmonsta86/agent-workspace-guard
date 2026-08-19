@@ -1,9 +1,11 @@
-# X reply
+# X Reply
 
-Replace the placeholder with the public repository URL. X shortens ordinary links, and this text leaves room for the shortened URL.
+## Recommended reply
 
-> Strong direction. I built a reference design beneath command checks: Codex runs in a disposable workspace with broker-owned HOME/TMP; a separate broker reviews an exact signed diff and quarantine-commits approved changes. RFC/tests: [repo URL]
+> Thanks for the transparency. I explored a complementary boundary: run Codex in a disposable workspace, then let a separate broker persist only an exact, policy-approved diff—with quarantine and restore. RFC + tests: https://github.com/dmonsta86/agent-workspace-guard
 
-## Follow-up only if asked
+## Follow-up only if useful
 
-> The key invariant is that arbitrary agent code never owns the real-workspace writer capability. Command checks still reduce incidents, but persistence is mediated from the evaluated result, with approval bound to one exact plan and prior files moved to quarantine before replacement.
+> The key change is authority, not syntax: arbitrary agent code never owns the live-workspace writer capability. Review approves one signed filesystem result, and replaced files move to quarantine before commit.
+
+The first post is 266 characters before X's URL normalization.

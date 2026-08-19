@@ -1,14 +1,14 @@
 # Verification Record
 
-This record describes the tagged reference implementation. It is evidence of repository behavior under the stated test environment, not proof that the Python process is an OS security boundary. v0.2.2 is a consolidation release; broker and policy code are unchanged from v0.2.1.
+This record describes the tagged reference implementation. It is evidence of repository behavior under the stated test environment, not proof that the Python process is an OS security boundary. v0.2.3 is a publication-hardening release; broker and result-policy behavior are unchanged from v0.2.2.
 
 ## Build environment
 
-- Date: August 18, 2026 (America/Chihuahua)
+- Date: August 19, 2026 (America/Chihuahua)
 - Python: 3.13.5
 - Git: 2.47.3
 - Runtime dependencies: Python standard library only
-- Release tag: `v0.2.2`
+- Release tag: `v0.2.3`
 
 ## Source verification
 
@@ -21,7 +21,7 @@ Result:
 
 - **36/36 unit and integration tests passed.**
 - **28/28 destructive-command replay cases passed.**
-- Repository SHA-256 manifest covering 48 files, Python compilation, and CLI smoke checks passed.
+- Repository SHA-256 manifest covering 53 files, Python compilation, and CLI smoke checks passed.
 - The demo completed exact planning, approval binding, quarantine-first commit, authenticated audit verification, and drift-safe restore.
 
 ## Release-artifact verification
@@ -32,7 +32,7 @@ The release was generated from a clean checkout with:
 python3 scripts/package_release.py --output /path/to/output
 ```
 
-That script fails unless `v0.2.2` points at the clean release commit. It then:
+That script fails unless `v0.2.3` points at the clean release commit. It then:
 
 1. verifies the source manifest and test suite;
 2. creates a Git archive ZIP and Git bundle, then validates archive paths and contents;

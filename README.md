@@ -1,18 +1,20 @@
 # Agent Workspace Guard
 
+[![CI](https://github.com/dmonsta86/agent-workspace-guard/actions/workflows/test.yml/badge.svg)](https://github.com/dmonsta86/agent-workspace-guard/actions/workflows/test.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 **A transactional persistence boundary for coding agents.**
 
-> **Canonical release:** start with [`START_HERE.md`](START_HERE.md). This v0.2.2 tree supersedes the earlier loose copies and preliminary archives.
+Agent Workspace Guard (AWG) is an independent RFC and executable reference implementation for limiting the blast radius of malformed cleanup, deletion, overwrite, rename, and tool-induced filesystem mutations.
 
-Agent Workspace Guard (AWG) is an independent design proposal and executable reference implementation for preventing malformed cleanup, deletion, overwrite, rename, and tool-induced mutations from damaging a user's real workspace.
+> **Core invariant:** During ordinary execution, the agent cannot write the live workspace or real home. It writes a disposable transaction; a separate trusted broker persists only one exact, signed, policy-approved filesystem result.
 
-The architectural rule is simple:
-
-> **The agent never writes the real workspace during task execution. It writes a disposable transaction. A separate broker persists only an exact, signed, policy-approved result.**
+**Review path:** [five-minute architecture](docs/ONE_PAGE.md) · [full RFC](docs/RFC.md) · [security argument](docs/SECURITY_ARGUMENT.md) · [production checklist](docs/IMPLEMENTATION_CHECKLIST.md) · [reviewer guide](START_HERE.md)
 
 Command classifiers, model instructions, approval prompts, automatic review, and replay evaluations remain useful. They no longer have to recognize every way arbitrary code can modify a filesystem in order to protect host files.
 
-> **Status:** RFC-quality design and stdlib-only Python reference implementation. This repository demonstrates the protocol, policy, integrity checks, quarantine commit, restore behavior, and evaluations. It is not a standalone OS sandbox. Production use requires the authority separation and platform work in [`docs/PRODUCTION_HARDENING.md`](docs/PRODUCTION_HARDENING.md).
+> **Status:** RFC-quality design and standard-library-only Python reference implementation. It demonstrates the protocol, result policy, integrity checks, quarantine-first commit, restore behavior, and evaluations. It is not a standalone OS sandbox. Production use requires the authority separation and platform work in [`docs/PRODUCTION_HARDENING.md`](docs/PRODUCTION_HARDENING.md).
 
 ## Why this design
 
@@ -99,7 +101,7 @@ The packaged verification run passes:
 - **28/28 destructive-command replay cases**
 - repository-manifest verification, Python compilation, and CLI smoke checks
 
-The included GitHub Actions workflow is configured to run the suite on Python 3.11 and 3.13 across Linux, macOS, and Windows after publication.
+GitHub Actions runs the suite on Python 3.11 and 3.13 across Linux, macOS, and Windows. The workflow also verifies the source manifest, package installation, compilation, replay corpus, and installed CLI.
 
 ## Minimal reference API
 
@@ -177,15 +179,16 @@ See [`docs/IMPLEMENTATION_CHECKLIST.md`](docs/IMPLEMENTATION_CHECKLIST.md) and [
 
 ## Submission route
 
-The prepared design issue is in [`submission/GITHUB_ISSUE.md`](submission/GITHUB_ISSUE.md). Submission guidance and Git commands are in [`submission/SUBMISSION_ROUTE.md`](submission/SUBMISSION_ROUTE.md). The concise public reply is in [`submission/TIBO_REPLY.md`](submission/TIBO_REPLY.md).
+A directly related upstream Codex discussion already exists in [`openai/codex#33624`](https://github.com/openai/codex/issues/33624). The preferred contribution is the concise, implementation-focused comment in [`submission/OPENAI_CODEX_COMMENT.md`](submission/OPENAI_CODEX_COMMENT.md), rather than a duplicate issue. The public X reply is in [`submission/TIBO_REPLY.md`](submission/TIBO_REPLY.md).
 
 ## Repository map
 
 ```text
-START_HERE.md                    canonical entry point and submission sequence
+START_HERE.md                    reviewer guide and current submission route
 src/agent_workspace_guard/       runnable reference implementation
 tests/                           unit and integration tests
 evals/                           cross-shell destructive replay corpus
+docs/ONE_PAGE.md                 five-minute architecture summary
 docs/RFC.md                      complete architecture proposal
 docs/SECURITY_ARGUMENT.md        assumptions, properties, proof sketch
 docs/THREAT_MODEL.md             adversary model and residual risk
@@ -197,7 +200,10 @@ docs/WHY_FILTERS_ARE_NOT_BOUNDARIES.md
 docs/ORIGINAL_PACKET_REVIEW.md   audit of the supplied regex packet
 docs/DESIGN_DECISIONS.md         selected and rejected alternatives
 docs/REFERENCES.md               primary references
-submission/GITHUB_ISSUE.md       issue-ready proposal
+submission/OPENAI_CODEX_COMMENT.md concise comment for the related upstream issue
+submission/GITHUB_ISSUE.md       standalone issue fallback
+submission/REPOSITORY_METADATA.md GitHub About description and topics
+submission/RELEASE_NOTES_v0.2.3.md release description
 submission/SUBMISSION_ROUTE.md   current publishing and disclosure route
 schemas/                         machine-readable plan schema
 scripts/verify_manifest.py        repository integrity verification

@@ -1,79 +1,36 @@
 # Recommended Submission Route
 
-This guidance is intentionally independent of live service status. Recheck the destination project's current contribution and security policies immediately before submission.
+## Current best route
 
-## Primary route for this package
+The repository is public at:
 
-This repository is an architectural hardening proposal and executable reference implementation. It does not, by itself, establish a nonpublic vulnerability in a deployed product.
+```text
+https://github.com/dmonsta86/agent-workspace-guard
+```
+
+A directly related upstream issue already exists:
+
+```text
+https://github.com/openai/codex/issues/33624
+```
+
+Because that issue already requests harness-level confirmation, quarantine/recovery, cross-tool enforcement, scope-aware Full Access, and auditing, the best next step is to add the implementation-focused text from `OPENAI_CODEX_COMMENT.md` there. Do not open a duplicate issue unless a maintainer asks for a separate RFC thread.
 
 Recommended sequence:
 
-1. Publish this repository under your own account so reviewers can inspect source, history, tests, and CI.
-2. Search the destination issue/discussion tracker for an existing proposal covering transactional workspaces, destructive actions, exact-result approval, quarantine, or commit brokers.
-3. Add the analysis to an existing thread when it clearly matches; otherwise open a focused design or feature proposal.
-4. Paste `submission/GITHUB_ISSUE.md` and replace the repository placeholder.
-5. Link directly to `docs/RFC.md`, `docs/SECURITY_ARGUMENT.md`, `docs/CODEX_INTEGRATION.md`, `docs/IMPLEMENTATION_CHECKLIST.md`, and the successful CI run.
-6. Use the public X reply only after the repository URL works.
-7. Do not open an unsolicited implementation pull request unless the current upstream contribution guide permits it or a maintainer invites a defined slice.
+1. Make the repository's GitHub Actions matrix green.
+2. Add the About description, homepage, and topics from `REPOSITORY_METADATA.md`.
+3. Create a `v0.2.3` GitHub release after CI passes.
+4. Post `OPENAI_CODEX_COMMENT.md` on the related upstream issue.
+5. Link the successful CI run and `docs/ONE_PAGE.md`.
+6. Use `TIBO_REPLY.md` for the concise public response.
+7. Submit implementation code upstream only if maintainers invite a defined contribution under the current contribution policy.
 
-The public repository URL should be the primary review surface. The canonical source ZIP is the immutable transfer copy.
+## Private reporting boundary
 
-## When private security reporting is appropriate
+Use the product's current private security-reporting route instead of a public issue when you have a concrete, validated, nonpublic sandbox, authorization, or host-write bypass whose disclosure could put users at risk. Do not publish credentials, personal paths, private source, raw rollouts, or exploit details merely to promote the architecture.
 
-Use the product's current private security-reporting route instead of a public issue when you have a concrete, validated, nonpublic sandbox, authorization, or host-write bypass whose disclosure could put users at risk.
-
-A useful private report includes:
-
-- affected product, build, and platform;
-- exact preconditions and permission mode;
-- a minimal sanitized reproduction;
-- expected and actual protected-host behavior;
-- evidence that a stated or observable boundary is bypassed;
-- impact and recovery observations;
-- no live credentials, customer data, personal paths, or unnecessary private source.
-
-A public architecture proposal and a separate private vulnerability report can coexist. Do not publish exploit details merely to promote the design.
-
-## Publish from the canonical ZIP
-
-```bash
-cd agent-workspace-guard
-git init -b main
-git add .
-git commit -m "Agent Workspace Guard v0.2.2"
-git tag -a v0.2.2 -m "Agent Workspace Guard v0.2.2"
-git remote add origin <your-repository-remote>
-git push -u origin main
-git push origin v0.2.2
-```
-
-Verify before publishing:
-
-```bash
-./scripts/verify.sh
-git status --short --branch
-git log --oneline --decorate -n 3
-git fsck --full
-```
-
-## Optional release artifacts
-
-From a clean checkout whose `v0.2.2` tag points at `HEAD`:
-
-```bash
-python3 scripts/package_release.py --output release
-```
-
-The script independently verifies and generates:
-
-- a source ZIP without `.git`;
-- a complete Git bundle;
-- an installable Python wheel;
-- SHA-256 checksums.
-
-These are transport formats for the same release, not separate versions.
-
-## Presentation guidance
+## Accurate positioning
 
 Describe this as:
 

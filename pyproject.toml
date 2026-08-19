@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-workspace-guard"
-version = "0.2.2"
+version = "0.2.3"
 description = "Reference implementation of a transactional workspace and commit broker for coding agents"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "Independent design submission" }]
+authors = [{ name = "dmonsta86" }]
 keywords = ["coding-agent", "sandbox", "filesystem", "safety", "codex"]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -22,6 +22,11 @@ classifiers = [
   "Topic :: Security",
 ]
 dependencies = []
+
+[project.urls]
+Repository = "https://github.com/dmonsta86/agent-workspace-guard"
+Documentation = "https://github.com/dmonsta86/agent-workspace-guard/blob/main/docs/ONE_PAGE.md"
+Issues = "https://github.com/dmonsta86/agent-workspace-guard/issues"
 
 [project.scripts]
 awg = "agent_workspace_guard.cli:main"

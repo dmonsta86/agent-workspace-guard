@@ -5,4 +5,4 @@ from .models import CommitPlan, Decision, Transaction
 from .policy import GuardPolicy
 
 __all__ = ["WorkspaceGuard", "GuardPolicy", "CommitPlan", "Decision", "Transaction"]
-__version__ = "0.2.2"
+__version__ = "0.2.3"

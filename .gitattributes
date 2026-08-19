@@ -1,0 +1,2 @@
+# Keep the repository manifest stable across Windows, macOS, and Linux checkouts.
+* text=auto eol=lf

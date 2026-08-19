@@ -2,6 +2,23 @@
 
 All notable changes to this independent reference design are documented here.
 
+## 0.2.3 — 2026-08-19
+
+### Publication hardening
+
+- Fixed the GitHub Actions install step by explicitly provisioning the declared build backend before using `--no-build-isolation`.
+- Added repository-wide LF normalization so the byte-level source manifest verifies on Windows checkouts.
+- Updated GitHub Actions to current Node 24-based major versions, disabled persisted checkout credentials, and made the full matrix non-fail-fast.
+- Added an installed-CLI check to CI.
+
+### Reviewer experience
+
+- Added a five-minute architecture summary and a shorter review path at the top of the README.
+- Added live repository metadata, a polished X reply, and a concise comment for the existing related `openai/codex#33624` discussion.
+- Replaced publication placeholders and obsolete first-publish instructions with the current contribution route.
+
+No broker or result-policy behavior changed from v0.2.2.
+
 ## 0.2.2 — 2026-08-18
 
 ### Canonical consolidation

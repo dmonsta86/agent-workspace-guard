@@ -1,4 +1,8 @@
-# Suggested issue title
+# Standalone Issue Fallback
+
+> A directly related issue already exists at https://github.com/openai/codex/issues/33624. Prefer posting `OPENAI_CODEX_COMMENT.md` there rather than opening a duplicate. Use this file only if maintainers request a separate RFC issue.
+
+## Suggested issue title
 
 **[RFC] Transactional workspace persistence: disposable execution + exact-diff commit broker**
 
@@ -117,7 +121,7 @@ Ordinary broad/Full access can expand runtime capability while transactional per
 
 ## Reference implementation
 
-Repository: **[insert repository URL]**
+Repository: **https://github.com/dmonsta86/agent-workspace-guard**
 
 Included:
 
